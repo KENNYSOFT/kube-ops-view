@@ -122,7 +122,7 @@ export class Node extends PIXI.Graphics {
         let podsKubeSystemCounter = 0
         const pods = Object.values(this.node.pods).sort(sorterFn)
         for (const pod of pods) {
-            if (pod.namespace != 'kube-system') {
+            if (pod.namespace != 'kube-system' && pod.ownerReferences[0].kind != 'DaemonSet') {
                 const podBox = Pod.getOrCreate(pod, this.cluster, this.tooltip)
                 podBox.movePodTo(
                     new PIXI.Point(

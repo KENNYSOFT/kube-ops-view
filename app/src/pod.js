@@ -209,16 +209,17 @@ export class Pod extends PIXI.Graphics {
         podBox.on('mouseover', function () {
             podBox.filters = podBox.filters.filter(x => x != BRIGHTNESS_FILTER).concat([BRIGHTNESS_FILTER])
             let s = this.pod.name
-            s += '\nNamespace : ' + this.pod.namespace
-            s += '\nStatus    : ' + this.pod.phase + ' (' + ready + '/' + this.pod.containers.length + ' ready)'
-            s += '\nStart Time: ' + this.pod.startTime
-            s += '\nLabels    :'
+            s += '\nNamespace    : ' + this.pod.namespace
+            s += '\nStatus       : ' + this.pod.phase + ' (' + ready + '/' + this.pod.containers.length + ' ready)'
+            s += '\nStart Time   : ' + this.pod.startTime
+            s += '\nLabels       :'
             for (var key of Object.keys(this.pod.labels).sort()) {
                 if (key !== 'pod-template-hash') {
                     s += '\n  ' + key + ': ' + this.pod.labels[key]
                 }
             }
-            s += '\nContainers:'
+            s += '\nControlled By: ' + this.pod.ownerReferences[0].kind + '/' + this.pod.ownerReferences[0].name
+            s += '\nContainers   :'
             for (const container of this.pod.containers) {
                 s += '\n  ' + container.name + ': '
                 if (container.state) {

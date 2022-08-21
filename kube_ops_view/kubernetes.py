@@ -56,6 +56,7 @@ def map_pod(pod: dict):
         "labels": pod["metadata"].get("labels", {}),
         "phase": pod["status"].get("phase"),
         "startTime": pod["status"]["startTime"] if "startTime" in pod["status"] else "",
+        "ownerReferences": pod["metadata"]["ownerReferences"],
         "containers": [],
     }
 
