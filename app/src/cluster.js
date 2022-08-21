@@ -87,7 +87,7 @@ export default class Cluster extends PIXI.Graphics {
 
         const maxWidth = (window.innerWidth * (1/this.config.initialScale)) - (this.heightOfWorkerNodePx * 1.2)
 
-        for (const nodeName of Object.keys(this.cluster.nodes).sort()) {
+        for (const nodeName of Object.keys(this.cluster.nodes).sort(new Intl.Collator(undefined, {numeric: true}).compare)) {
             const node = this.cluster.nodes[nodeName]
             let nodeBox = null
 
